@@ -6,10 +6,21 @@ from PIL import Image
 import io
 import cv2
 from ultralytics import YOLO
+import requests
+import os
 
-# model_path = "https://github.com/yashseth391/testing_render/blob/main/last.pt"
-# model = YOLO('yolov8n.pt')
-# model = YOLO(model_path)
+# URL to the model weights file in your GitHub repository
+model_url = "https://raw.githubusercontent.com/your-username/your-repo/main/path/to/last.pt"
+model_path = "last.pt"
+
+# Download the model weights if they do not exist
+if not os.path.exists(model_path):
+    response = requests.get(model_url)
+    with open(model_path, "wb") as f:
+        f.write(response.content)
+
+model = YOLO('yolov8n.pt')
+model = YOLO(model_path)
 
 app = FastAPI()
 
@@ -25,24 +36,21 @@ def read_root():
 @app.post("/predict/")
 async def classify_image(file: UploadFile = File(...)):
     try:
-        # content = await file.read()
-        # image = Image.open(io.BytesIO(content))
-        # image = image.convert("RGB")
-        # new_size = (image.width * 2, image.height * 2)
-        # image = image.resize(new_size)
-        # image.save("image.jpg")
-        # results = model(image)
-        # for result in results:
-        #     result.show()
-        #     result.save(filename="ans.jpg")
-        # img = cv2.imread("ans.jpg")
+        content = await file.read()
+        image = Image.open(io.BytesIO(content))
+        image = image.convert("RGB")
+        new_size = (image.width * 2, image.height * 2)
+        image = image.resize(new_size)
+        image.save("image.jpg")
+        results = model(image)
+        for result in results:
+            result.show()
+            result.save(filename="ans.jpg")
+        img = cv2.imread("ans.jpg")
         return {"message": "Image saved successfully."}
     except Exception as e:
         return {"error": str(e)}
 
 @app.get("/ans/")
 def ans():
-    return {"Resposne succesfully"}
-    # return FileResponse("ans.jpg")
-
-
+    return FileResponse("ans.jpg")
