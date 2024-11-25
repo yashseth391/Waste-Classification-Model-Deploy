@@ -10,17 +10,17 @@ import requests
 import os
 
 # URL to the model weights file in your GitHub repository
-model_url = "https://raw.githubusercontent.com/your-username/your-repo/main/path/to/last.pt"
+model = "https://github.com/yashseth391/testing_render/blob/e2c9932321aca73db2e16942e18d4f4207c23112/last.pt"
 model_path = "last.pt"
 
 # Download the model weights if they do not exist
-if not os.path.exists(model_path):
-    response = requests.get(model_url)
-    with open(model_path, "wb") as f:
-        f.write(response.content)
+# if not os.path.exists(model_path):
+#     response = requests.get(model_url)
+#     with open(model_path, "wb") as f:
+#         f.write(response.content)
 
-model = YOLO('yolov8n.pt')
-model = YOLO(model_path)
+# model = YOLO('yolov8n.pt')
+# model = YOLO(model_url)
 
 app = FastAPI()
 
@@ -54,3 +54,4 @@ async def classify_image(file: UploadFile = File(...)):
 @app.get("/ans/")
 def ans():
     return FileResponse("ans.jpg")
+
