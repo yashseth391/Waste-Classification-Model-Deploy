@@ -7,7 +7,7 @@ import io
 import cv2
 from ultralytics import YOLO
 
-model_path = "best.pt"
+model_path = "https://github.com/yashseth391/testing_render/blob/main/last.pt"
 model = YOLO('yolov8n.pt')
 model = YOLO(model_path)
 
