@@ -1,6 +1,6 @@
 fastapi[all]
 pydantic
-uvicorn 
+
 ultralytics
 pillow
 opencv-python
