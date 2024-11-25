@@ -10,17 +10,23 @@ import requests
 import os
 
 # URL to the model weights file in your GitHub repository
-model = "https://github.com/yashseth391/testing_render/blob/e2c9932321aca73db2e16942e18d4f4207c23112/last.pt"
+model_url = "https://raw.githubusercontent.com/yashseth391/testing_render/main/last.pt"
 model_path = "last.pt"
 
 # Download the model weights if they do not exist
-# if not os.path.exists(model_path):
-#     response = requests.get(model_url)
-#     with open(model_path, "wb") as f:
-#         f.write(response.content)
 
-# model = YOLO('yolov8n.pt')
-# model = YOLO(model_url)
+response = requests.get(model_url)
+with open(model_path, "wb") as f:
+    f.write(response.content)
+print("Model weights downloaded successfully")
+
+# Load the model
+try:
+    model = YOLO('yolov8n.pt')
+    model = YOLO(model_path)
+    print("Model loaded successfully")
+except Exception as e:
+    print(f"Error loading model: {e}")
 
 app = FastAPI()
 
@@ -47,11 +53,10 @@ async def classify_image(file: UploadFile = File(...)):
             result.show()
             result.save(filename="ans.jpg")
         img = cv2.imread("ans.jpg")
-        return {"message": "Image saved successfully."}
+        return {"message": "Image saved successfully"}
     except Exception as e:
         return {"error": str(e)}
 
 @app.get("/ans/")
 def ans():
     return FileResponse("ans.jpg")
-
