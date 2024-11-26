@@ -10,19 +10,22 @@ import requests
 import os
 
 # URL to the model weights file in your GitHub repository
-model_url = "https://raw.githubusercontent.com/yashseth391/testing_render/main/last.pt"
+model_url = "https://github.com/yashseth391/wasify_api_final/blob/main/last.pt"
 model_path = "last.pt"
 
 # Download the model weights if they do not exist
-
-response = requests.get(model_url)
-with open(model_path, "wb") as f:
-    f.write(response.content)
-print("Model weights downloaded successfully")
-
+# Download the model weights if they do not exist
+if not os.path.exists(model_path):
+    print(f"Downloading model weights from {model_url}")
+    response = requests.get(model_url)
+    if response.status_code == 200:
+        with open(model_path, "wb") as f:
+            f.write(response.content)
+        print("Model weights downloaded successfully")
+    else:
+        print(f"Failed to download model weights: {response.status_code}")
 # Load the model
 try:
-    model = YOLO('yolov8n.pt')
     model = YOLO(model_path)
     print("Model loaded successfully")
 except Exception as e:
