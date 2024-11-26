@@ -10,7 +10,7 @@ import requests
 import os
 
 # URL to the model weights file in your GitHub repository
-model_url = "https://github.com/yashseth391/wasify_api_final/blob/main/last.pt"
+model_url = "https://github.com/yashseth391/wasify_api_final/blob/c3406a358ea4cdee3fd60da5cb99ec0c457e7f1c/last.pt"
 model_path = "last.pt"
 
 # Download the model weights if they do not exist
