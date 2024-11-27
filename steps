@@ -1,0 +1,19 @@
+1.create a venv
+
+python -m venv .venv
+ .venv\Scripts\Activate.ps1
+  python -m pip install --upgrade pip
+ pip install "fastapi[standard]"
+
+ 2.create the file
+
+
+ 3.Run the file
+ fastapi dev main.py 
+
+ 4.Hosting it 
+
+ Create a vercel account then do it from terminal 
+ https://www.youtube.com/watch?v=8R-cetf_sZ4&t=276s
+
+--Do vercel.
