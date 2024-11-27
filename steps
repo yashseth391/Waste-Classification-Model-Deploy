@@ -1,9 +1,12 @@
+#If you are using any custom upload on same or any directory copy permalink not link and paste it to download inside the main.py where i have model_path
+
 1.create a venv
 
 python -m venv .venv
  .venv\Scripts\Activate.ps1
   python -m pip install --upgrade pip
  pip install "fastapi[standard]"
+
 
  2.create the file
 
@@ -14,6 +17,13 @@ python -m venv .venv
  4.Hosting it 
 
  Create a vercel account then do it from terminal 
- https://www.youtube.com/watch?v=8R-cetf_sZ4&t=276s
+ https://www.youtube.com/watch?v=8R-cetf_sZ4&t=276s # failed for me
 
 --Do vercel.
+
+5 If fourth step failed for you 
+Go to render connect your repo
+
+Build command :  pip install -r requirements.txt
+start command: uvicorn main:app --host 0.0.0.0 --port $PORT
+
