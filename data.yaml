@@ -1,0 +1,20 @@
+train: D:\College Minor Project\WasificationML\train\images
+val: D:\College Minor Project\WasificationML\valid\images
+test: D:\College Minor Project\WasificationML\test\images
+
+nc: 12
+names:
+  [
+    "Biodegradable",
+    "Can",
+    "Cardboard",
+    "Glass",
+    "Metal",
+    "Newspaper",
+    "Paper",
+    "Paper Cup",
+    "Plastic Bag",
+    "Plastic Bottle",
+    "Plastic Container",
+    "Plastic Cup",
+  ]
